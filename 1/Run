@@ -1,0 +1,125 @@
+#!/bin/bash
+set -x
+set -o
+while :
+	do	
+	   clear
+           echo "Server Name - $(hostname)"
+	   echo "1 Update System"
+	   echo "2 Install wp-cli with Bash"
+	   echo "3 wp-cli help" 
+	   echo "4. Exit"
+               
+			   read -p "Enter your choice [ 1 -5 ] " choice
+           
+		   case $choice in
+        	1)
+		
+		  if [[ $EUID -eq 0 ]]; then
+		    echo "Updating/Prerequisite Packages"
+		
+			#apt-get update 
+			
+			declare -a packages=('curl' 'wget' 'nginx' 'php7.0' 'php7.0-cli' 'php7.0-common' 'php7.0-curl' 'mysql-server' 'php-curl' 'php-gd' 'php-mbstring' 'php-mcrypt' 'php-xml' 'php-xmlrpc' 'php7.0-mysql' 'php-fpm' 'php-mysql' 'php7.0-json' 'php7.0-opcache')
+			 for ((i=0; i < ${#packages[@]}; i++))
+			  do
+			     if [[ $(dpkg-query -f'${Status}' --show ${packages[$i]}	) = *\ installed ]]; then
+			  		if [[ ${packages[$i]} == mysql-server ]]; then	
+					  read -p "Enter MySQL root Password " password
+					fi
+				  		  echo "INTALLED ${packages[$i]}" >> Loger.log
+			      else
+				       if [[ ${packages[$i]} == mysql-server ]]; then		
+					  echo "${packages[$i]} is not installed"
+					   password=$(date | md5sum | head -c 6)
+				   echo "mysql-server-5.7 mysql-server/root_password password $password" | sudo debconf-set-selections
+				   echo "mysql-server-5.7 mysql-server/root_password_again password $password" | sudo debconf-set-selections
+					apt-get install -y mysql-server >> Loger.log 2>&1
+					apt-get autoremove -y >> Loger.log 2>&1
+					apt-get autoclean -y >> Loger.log 2>&1
+					echo $password > password
+				       fi
+					
+					apt-get install ${packages[$i]} -y >> Loger.log 2>&1
+					apt-get autoremove -y >> Loger.log 2>&1
+					apt-get autoclean -y >> Loger.log 2>&1
+				fi
+				   done
+					
+		   else
+					echo "Use: sudo ./run"
+					exit 1
+		    fi
+			read -p "Press [Enter] key to continue..." readEnterKey
+			;;
+
+		2)
+		 	read -p "Enter your sudo user name " name
+		  	 cd ~/#; #curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+		  	 chmod +x wp-cli.phar
+		  	 mv wp-cli.phar /usr/local/bin/wp
+		  	 cd ~/; wget https://raw.githubusercontent.com/vipullinux/wp-cli/master/utils/wp-completion.bash
+		  		 if [ -f $HOME/.bashrc ]; then
+					 cat wp-completion.bash >> .bashrc >> Loger.log 2>&1 
+					 sudo -u $name -i -- source $HOME/.bashrc >> Loger.log 2>&1
+		  		 fi
+                  		while :
+		 		 do	
+				  read -p "Enter the domain name (eg.bipul.net): " example_com
+				  grep $example_com /etc/hosts >> Loger.log 2>&1			
+				  if [ $? -eq 0 ]; then
+				    	echo "The domain name has already been taken"
+				  else
+				  	break
+				  fi		
+				 done
+			sed -i "s/localhost/$example_com/" /etc/hosts
+			echo "Your domain name is $example_com"
+
+				#UBUNTU-DESKTOP 16.04 Codename: xenial
+
+				cat - <<-EOF >command.sed
+				39s/index/& &.php/
+				41s/ _/ localhost www.$example_com/
+				51,52s/^.\{2\}/\t/
+				57,58s/^.\{2\}/\t/
+				EOF
+				sed -i -f command.sed /etc/nginx/sites-available/default >> Loger.log 2>&1
+			read -p "Enter database name: " dbnames
+		        read -p "Enter Wordpress admin name: " wpadmin
+			mkdir -p /var/www/html; cd /var/www/html/
+			#Downloading wordpress at /var/www/html/
+			wp core download --locale=en_US --allow-root >> Loger.log 2>&1
+			# create the wp-config file
+			wp core config --dbname="$dbnames" --dbuser=root --dbpass="$password" --allow-root >> Loger.log 2>&1
+			wp db create --allow-root >> Loger.log 2>&1
+			wp core install --url="http://$example_com" --title=Run --admin_user="$wpadmin" --admin_password="$password" --admin_email="$USER@example_com" --allow-root >> Loger.log 2>&1
+			echo "================================================================="
+			echo "Installation is complete. Your username/password is listed below."
+			echo ""
+			echo "Username: $wpadmin"
+			echo "Password for MySQL and wordpress are same: $password"
+			echo ""
+			echo "================================================================="
+			read -p "Press Enter key to continue..." readEnterKey
+			;;
+
+		
+		3)	echo "wp-cli help..."
+			echo "https://wp-cli.org/commands/"
+			nginx -t >> Loger.log 2>&1
+			service nginx reload >> Loger.log 2>&1
+			service nginx start >> Loger.log 2>&1
+			service nginx restart >> Loger.log 2>&1
+			systemctl restart php7.0-fpm.service 2>&1
+			exit 0
+			;;
+		*)
+			
+			echo "invalid option choose wise..."	
+			read -p "Press [Enter] key to continue..." readEnterKey
+			;;
+
+
+	esac
+done	
