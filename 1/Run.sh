@@ -17,7 +17,7 @@ TEMP="`mktemp`"
 					echo $(tput setaf 1)$@$(tput sgr0)
 			}
 clear
-			ee_echo "The Magic  begins"
+			
 # Authentication
 	if [[ $EUID -eq 0 ]]; then
 		ee_info "Sudo user privilage."
