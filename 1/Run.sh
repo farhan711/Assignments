@@ -6,7 +6,6 @@ TEMP="`mktemp`"
 			echo $(tput setaf 7)$@$(tput sgr0)
 	}
 
-	
 		function ee_echo()
 		{
 				echo $(tput setaf 4)$@$(tput sgr0)
