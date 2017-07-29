@@ -1,19 +1,22 @@
 
 TEMP="`mktemp`"
-
+#defining colors
 	function ee_info()
 	{
 			echo $(tput setaf 7)$@$(tput sgr0)
+			#White for Success.
 	}
 
 		function ee_echo()
 		{
 				echo $(tput setaf 4)$@$(tput sgr0)
+				#Blue for running
 		}
 		
 			function ee_fail()
 			{
 					echo $(tput setaf 1)$@$(tput sgr0)
+					#Red for error
 			}
 clear
 			
