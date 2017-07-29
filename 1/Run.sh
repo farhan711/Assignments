@@ -238,16 +238,28 @@ EOF
 	sed -i "s/\(.*'DB_NAME',\)\(.*\)/\1'${example_com//./_}$db_name');/" /var/www/$example_com/wp-config.php
 	sed -i "s/\(.*'DB_USER',\)\(.*\)/\1'${example_com//./_}');/" /var/www/$example_com/wp-config.php
 	sed -i "s/\(.*'DB_PASSWORD',\)\(.*\)/\1'$password');/" /var/www/$example_com/wp-config.php
-	
+
+
+
+
+#define('AUTH_KEY',         's{#03M9G9-%WU@0-@noq`zH_jqi0f-Y5{5_N[/=}/)qS),vRhAj,cq4AMz Y?k:5');
+#define('SECURE_AUTH_KEY',  'Ur)ievgz:#[TyucD7}Oct#}mD[`v6SjwoUlMxu-&aO8k4/dGVx>*Gd0pJit%2J}t');
+#define('LOGGED_IN_KEY',    'lRm:GT]qk5+A;;49N  08>~des>{+.^zYX+9($5V]#++1&wT|EJ*f.o!$4@6&awY');
+#define('NONCE_KEY',        '_KXrLr6Xvz7rwX)//1vLB>[~LiXL[JaUt^2SD5bf|jjr>4P6y^?t^MBdfaRRv$FL');
+#define('AUTH_SALT',        'J;g1)ULv`leJr4Hi*;X3D#b?I@y9.d 5dPIF27pV=/q?UX_?(l{^dS:4DC-SB|M&');
+#define('SECURE_AUTH_SALT', 'c->1W!N0rm#h |`7etHKUt,N;WTW&}B^K`|u_KGQ~V|ChhH;B,d?HHW_0drKM}$2');
+#define('LOGGED_IN_SALT',   '*s8[]},Gy,V_KWT4{!n( Ef-Ffh]8d:z[,ha;o)U~[osDd+Vf3-,fvxrdw>?++[c');
+#define('NONCE_SALT',       'y K3Z+T&Az=FdRc.8@=Z(=A-R^r_cX[FZ&ieL%2*/]Ra,s4Eg:jIY2PiESEj%tF$');
 #Creating security of Wp-config
-sed -i 's/\(.*'\''AUTH_KEY'\'',\)\(.*\)/\1'\''Ap2g08@ON7e-j]?+E.csw>-{2hkE!()#rb7gD]q|\&;C4@3455AL_=1LQZ92u|IH}'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''SECURE_AUTH_KEY'\'',\)\(.*\)/\1'\''OKuteSM`D=6LVHR+cDbG_cBQ}w@-;>!{T*fy?g{.O(^{V }ygFO:Gc$m9.Iwz~I{'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''LOGGED_IN_KEY'\'',\)\(.*\)/\1'\''eKR=za5g(>GZr(`{-n8j86aM]L>Imhg@hO\/kyv954MVeslHtT+sCq}^|OVQrrq^B'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''NONCE_KEY'\'',\)\(.*\)/\1'\''e_Cc;YTW,y3Cplk{4^AFcnQOvtL%+G6CYAK$=yiq;#d?%11SlkYR8CQD$C\/S|8Mq'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''AUTH_SALT'\'',\)\(.*\)/\1'\''sDj8\&?Blr|r_x%;wqA069^O8?5+G8@7hZD`{0|RN=kp>H)Us(]wv.6Mu,M)%cF.a'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''SECURE_AUTH_SALT'\'',\)\(.*\)/\1'\''do}{{It04FMH+Su+#[(0lC-Khvc2[DO`Xy;}348?_Ah|INH[t~5:|m.JlegN%t\&g'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''LOGGED_IN_SALT'\'',\)\(.*\)/\1'\''O7|C5K-u+jkc~kf^hlf6t:|-;,5HI]d4G 2mK_h|~FZ!uifbcE:UAHExyB)$0a.+'\'');/' /var/www/$example_com/wp-config.php
-sed -i 's/\(.*'\''NONCE_SALT'\'',\)\(.*\)/\1'\''k:d6U3,|YiE^36Un-8xl99?Uz|M[x#{yI-K?0{-- \&2T-J-mfr#;|XxrQFop\&^Z+'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''AUTH_KEY'\'',\)\(.*\)/\1'\''s{#03M9G9-%WU@0-@noq`zH_jqi0f-Y5{5_N[/=}/)qS),vRhAj,cq4AMz Y?k:5'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''SECURE_AUTH_KEY'\'',\)\(.*\)/\1'\''Ur)ievgz:#[TyucD7}Oct#}mD[`v6SjwoUlMxu-&aO8k4/dGVx>*Gd0pJit%2J}t'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''LOGGED_IN_KEY'\'',\)\(.*\)/\1'\''lRm:GT]qk5+A;;49N  08>~des>{+.^zYX+9($5V]#++1&wT|EJ*f.o!$4@6&awY'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''NONCE_KEY'\'',\)\(.*\)/\1'\''_KXrLr6Xvz7rwX)//1vLB>[~LiXL[JaUt^2SD5bf|jjr>4P6y^?t^MBdfaRRv$FL'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''AUTH_SALT'\'',\)\(.*\)/\1'\''J;g1)ULv`leJr4Hi*;X3D#b?I@y9.d 5dPIF27pV=/q?UX_?(l{^dS:4DC-SB|M&'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''SECURE_AUTH_SALT'\'',\)\(.*\)/\1'\''c->1W!N0rm#h |`7etHKUt,N;WTW&}B^K`|u_KGQ~V|ChhH;B,d?HHW_0drKM}$2'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''LOGGED_IN_SALT'\'',\)\(.*\)/\1'\''*s8[]},Gy,V_KWT4{!n( Ef-Ffh]8d:z[,ha;o)U~[osDd+Vf3-,fvxrdw>?++[c'\'');/' /var/www/$example_com/wp-config.php
+sed -i 's/\(.*'\''NONCE_SALT'\'',\)\(.*\)/\1'\''y K3Z+T&Az=FdRc.8@=Z(=A-R^r_cX[FZ&ieL%2*/]Ra,s4Eg:jIY2PiESEj%tF$'\'');/' /var/www/$example_com/wp-config.php
+
 
 
 	chown www-data:www-data * -R /var/www/
