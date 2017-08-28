@@ -41,6 +41,6 @@ user@hostname$ python3 Blog_Arg_script.py post delete "planets 1"
 
 Note: Use only python if system don't have multi python versions.
 
-Requirement :
 
+Required Version :
 **Python 3.6**
