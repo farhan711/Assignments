@@ -9,11 +9,13 @@ positional arguments:
 ```
 
 
-<b>Creating a post</b>
+Creating a post
+
 ```
 user@hostname$ python3 Blog_Arg_script.py post add -c Universe -a farhan -p "planets" "The following are the Universe available: Mercury, Venus , Earth";```
 
 Blog post created successfully!
+
 ```
 Title: 'planets'
 Author: 'farhan'
@@ -22,19 +24,23 @@ Content: 'The following are the planets available: Mercury, Venus , Earth'
 ```
 
 
-<b>List a post</b>
+List a post
+
 ```
 user@hostname$ python3 Blog_Arg_script.py post list
 ```
+
 Displaying 1 blog posts.
 
 
-<b>Search a post</b>
+Search a post
+
 ```
 user@hostname$ python3 Blog_Arg_script.py post search "planets 1"
 ```
 
-<b>Delete a post</b>
+Delete a post
+
 ```
 user@hostname$ python3 Blog_Arg_script.py post delete "planets 1"
 ```
