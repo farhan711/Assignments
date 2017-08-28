@@ -43,4 +43,4 @@ Note: Use only python if system don't have multi python versions.
 
 Requirement :
 
-** Python 3.6 **
+**Python 3.6**
